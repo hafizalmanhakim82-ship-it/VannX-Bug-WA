@@ -26,13 +26,16 @@ jobs:
           gradle-version: '8.9'
 
       - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
+  uses: android-actions/setup-android@v3
+  with:
+    cmdline-tools-version: 12266719
 
-      - name: Install Android SDK 35
-        run: |
-          yes | sdkmanager --licenses
-          sdkmanager "platforms;android-35" "build-tools;35.0.0"
-
+ - name: Install Android SDK
+  run: |
+    sdkmanager --install "platform-tools"
+    sdkmanager --install "platforms;android-35"
+    sdkmanager --install "build-tools;35.0.0"
+      
       - name: Generate Gradle Wrapper
         run: gradle wrapper --gradle-version 8.9
 
